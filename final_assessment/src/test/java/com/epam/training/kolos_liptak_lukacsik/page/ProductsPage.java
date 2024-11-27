@@ -4,11 +4,13 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class ProductsPage extends AbstractPage{
 
     private static final String PRODUCTS_URL = "https://www.saucedemo.com/inventory.html";
-
+    private final Logger logger = LogManager.getRootLogger();
 
     /*
     The task description asked for "Swag Labs" in the dashboard
@@ -27,6 +29,7 @@ public class ProductsPage extends AbstractPage{
     @Override
     public AbstractPage openPage() {
         driver.navigate().to(PRODUCTS_URL);
+        logger.info("Products page opened");
         return this;
     }
 

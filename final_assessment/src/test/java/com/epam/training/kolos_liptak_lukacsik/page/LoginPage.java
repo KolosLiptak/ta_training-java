@@ -10,10 +10,13 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class LoginPage extends AbstractPage {
 
     private final String LOGIN_URL = "https://www.saucedemo.com/";
+    private final Logger logger = LogManager.getRootLogger();
 
     @FindBy(xpath = "//*[@id=\"user-name\"]")
     private WebElement usernameField;
@@ -39,6 +42,7 @@ public class LoginPage extends AbstractPage {
     @Override
     public LoginPage openPage() {
         driver.navigate().to(LOGIN_URL);
+        logger.info("Login page opened");
         return this;
     }
 
@@ -49,9 +53,8 @@ public class LoginPage extends AbstractPage {
      */
     public LoginPage enterLoginInfo(String username, String password){
         usernameField.sendKeys(username);
-
-
         passwordField.sendKeys(password);
+        logger.info("Login info entered");
         return this;
     }
 
@@ -59,6 +62,7 @@ public class LoginPage extends AbstractPage {
         for (int i = 0; i < username.length(); i++) {
             usernameField.sendKeys(Keys.BACK_SPACE);
         }
+
         return this;
     }
 
@@ -66,6 +70,7 @@ public class LoginPage extends AbstractPage {
         for (int i = 0; i < password.length(); i++) {
             passwordField.sendKeys(Keys.BACK_SPACE);
         }
+        logger.info("Password field cleared");
         return this;
     }
 
@@ -73,11 +78,13 @@ public class LoginPage extends AbstractPage {
     public LoginPage clickLoginButton(){
         loginButton.click();
         setErrorMessage();
+        logger.info("Login button clicked");
         return this;
     }
 
 
     public ProductsPage loginSuccessful(){
+        logger.info("Successful login");
         return new ProductsPage(driver);
     }
 
@@ -90,6 +97,7 @@ public class LoginPage extends AbstractPage {
 
     }
     public String getErrorMessage(){
+        logger.info("Error message retrieved");
         return errorMessageString;
     }
 }
