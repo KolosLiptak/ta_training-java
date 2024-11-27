@@ -2,18 +2,12 @@ package com.epam.training.kolos_liptak_lukacsik.page;
 
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.awt.image.Kernel;
-import java.security.Key;
-import java.time.Duration;
 import java.util.List;
 
 public class LoginPage extends AbstractPage {
@@ -28,6 +22,9 @@ public class LoginPage extends AbstractPage {
 
     @FindBy(xpath = "//*[@id=\"login-button\"]")
     private WebElement loginButton;
+
+    //xpath of the error message, used in function
+    private final String errorXPath = "//*[@data-test=\"error\"]";
 
 
     private String errorMessageString;
@@ -88,7 +85,7 @@ public class LoginPage extends AbstractPage {
     }
 
     public void setErrorMessage(){
-        String errorPath = "//*[@data-test=\"error\"]";
+        String errorPath = errorXPath;
         List<WebElement> errors = driver.findElements(By.xpath(errorPath));
         if (!errors.isEmpty()){
             errorMessageString = errors.get(0).getText();
