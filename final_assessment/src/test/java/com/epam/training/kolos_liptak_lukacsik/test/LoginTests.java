@@ -8,20 +8,14 @@ import static org.hamcrest.Matchers.*;
 
 public class LoginTests extends CommonConditions{
 
-    /*
-    The clear() method does not clear the text fields.
-    See also: comment above used method in class LoginPage.
-    The tests will pass given empty credentials.
-     */
-
     @Test
     public void loginWithEmptyCredentials(){
         String expectedErrorMessage = "Epic sadface: Username is required";
         String actualErrorMessage = new LoginPage(driver)
                 .openPage()
                 .enterLoginInfo(USER_NAME, PASSWORD)
-                .clearUsernameField()
-                .clearPasswordField()
+                .clearUsernameField(USER_NAME)
+                .clearPasswordField(PASSWORD)
                 .clickLoginButton()
                 .getErrorMessage();
 
@@ -29,18 +23,13 @@ public class LoginTests extends CommonConditions{
 
     }
 
-    /*
-    Instead of entering a password then deleting it
-    I passed an empty password to workaround known issue
-    and to test handling the error message.
-     */
     @Test
     public void loginWithUsernameNoPassword(){
         String expectedErrorMessage = "Epic sadface: Password is required";
         String actualErrorMessage = new LoginPage(driver)
                 .openPage()
-                .enterLoginInfo(USER_NAME, "")
-                .clearPasswordField()
+                .enterLoginInfo(USER_NAME, PASSWORD)
+                .clearPasswordField(PASSWORD)
                 .clickLoginButton()
                 .getErrorMessage();
 
@@ -54,7 +43,6 @@ public class LoginTests extends CommonConditions{
         String actualProductsTitle = new LoginPage(driver)
                 .openPage()
                 .enterLoginInfo(USER_NAME, PASSWORD)
-                .clearPasswordField()
                 .clickLoginButton()
                 .loginSuccessful()
                 .getProductsTitle();

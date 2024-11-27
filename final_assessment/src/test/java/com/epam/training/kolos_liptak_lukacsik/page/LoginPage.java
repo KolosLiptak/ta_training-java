@@ -2,6 +2,7 @@ package com.epam.training.kolos_liptak_lukacsik.page;
 
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -48,23 +49,23 @@ public class LoginPage extends AbstractPage {
      */
     public LoginPage enterLoginInfo(String username, String password){
         usernameField.sendKeys(username);
+
+
         passwordField.sendKeys(password);
         return this;
     }
 
-    /*
-    The clear() method does not clear the text fields.
-    This is a known issue and the suggested workarounds
-    did not fix the problem here.
-    The corresponding tests will fail.
-     */
-    public LoginPage clearUsernameField(){
-        usernameField.clear();
+    public LoginPage clearUsernameField(String username){
+        for (int i = 0; i < username.length(); i++) {
+            usernameField.sendKeys(Keys.BACK_SPACE);
+        }
         return this;
     }
 
-    public LoginPage clearPasswordField(){
-        passwordField.clear();
+    public LoginPage clearPasswordField(String password){
+        for (int i = 0; i < password.length(); i++) {
+            passwordField.sendKeys(Keys.BACK_SPACE);
+        }
         return this;
     }
 
@@ -75,11 +76,7 @@ public class LoginPage extends AbstractPage {
         return this;
     }
 
-    /*
-    Successful login separated from button click
-    to differentiate between a successful login
-    and receiving an error message
-    */
+
     public ProductsPage loginSuccessful(){
         return new ProductsPage(driver);
     }
