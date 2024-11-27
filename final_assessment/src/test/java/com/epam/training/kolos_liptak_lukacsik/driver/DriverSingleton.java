@@ -11,15 +11,9 @@ public class DriverSingleton {
 
     private DriverSingleton(){}
 
-    static String str = "chrome";
-
-    /*
-    The driver works in both Chrome and Edge cases.
-    Dynamic implementation is missing.
-     */
     public static WebDriver getDriver(){
         if (driver == null){
-            switch (str){
+            switch (System.getProperty("browser")){
                 case "chrome": {
                     WebDriverManager.chromedriver().setup();
                     driver = new ChromeDriver();

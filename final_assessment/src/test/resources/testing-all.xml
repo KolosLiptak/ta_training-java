@@ -1,0 +1,9 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="All tests"    >
+    <test name="All tests"   >
+        <packages>
+            <package name="com.epam.training.kolos_liptak_lukacsik" />
+        </packages>
+    </test>
+</suite>
