@@ -50,4 +50,5 @@ public class LoginTests extends CommonConditions{
         assertThat(actualProductsTitle, equalTo(expectedProductsTitle));
 
     }
+
 }

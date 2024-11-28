@@ -1,9 +1,23 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
-<suite name="All tests"    >
-    <test name="All tests"   >
-        <packages>
-            <package name="com.epam.training.kolos_liptak_lukacsik" />
-        </packages>
+<suite name="All tests" parallel="tests" thread-count="2" verbose="1">
+    <test name="Failed login" parallel="methods" thread-count="2">
+        <classes>
+            <class name="com.epam.training.kolos_liptak_lukacsik.test.LoginTests">
+                <methods>
+                    <include name="loginWithEmptyCredentials"/>
+                    <include name="loginWithUsernameNoPassword"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name="Successful login" parallel="methods" thread-count="2">
+        <classes>
+            <class name="com.epam.training.kolos_liptak_lukacsik.test.LoginTests">
+                <methods>
+                    <include name="loginWithValidCredentials"/>
+                </methods>
+            </class>
+        </classes>
     </test>
 </suite>
